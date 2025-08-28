@@ -1,19 +1,46 @@
+import java.util.Scanner;
+
 public class Zuke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|_   / _   _| |  ____ \n"
-                + "  / / | | | | |/ / _ \\\n"
-                + " / /_ | |_| |   <  __/\n"
-                + "|____| \\__,_|_|\\_\\___|\n";
+        String logo = "$$$$$$$$\\ $$\\   $$\\ $$\\   $$\\ $$$$$$$$\\ \n" +
+                "\\____$$  |$$ |  $$ |$$ | $$  |$$  _____|\n" +
+                "    $$  / $$ |  $$ |$$ |$$  / $$ |      \n" +
+                "   $$  /  $$ |  $$ |$$$$$  /  $$$$$\\    \n" +
+                "  $$  /   $$ |  $$ |$$  $$<   $$  __|   \n" +
+                " $$  /    $$ |  $$ |$$ |\\$$\\  $$ |      \n" +
+                "$$$$$$$$\\ \\$$$$$$  |$$ | \\$$\\ $$$$$$$$\\ \n" +
+                "\\________| \\______/ \\__|  \\__|\\________|\n" +
+                "                                        \n" +
+                "                                        \n" +
+                "                                        ";
         System.out.println(logo);
-        printline();
+        printLine();
         System.out.println("Hello! I'm Zuke\n" + "What can I do for you?");
-        printline();
+        printLine();
         System.out.println("Bye. Hope to see you again soon!");
-        printline();
+        printLine();
+
+        //echo implementation
+        Scanner in = new Scanner(System.in);
+
+        while (true){
+            String line = in.nextLine();
+
+            if (line.equals("bye")){
+                printLine();
+                System.out.println("Bye. Hope to see you again soon!");
+                printLine();
+                break;
+            }
+
+            printLine();
+            System.out.println(line);
+            printLine();
+
+        }
     }
 
-    public static void printline() {
+    public static void printLine() {
         System.out.println("____________________________________________________________");
     }
 }
