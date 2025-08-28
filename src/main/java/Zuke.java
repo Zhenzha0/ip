@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Zuke {
     public static void main(String[] args) {
@@ -20,23 +21,39 @@ public class Zuke {
         System.out.println("Bye. Hope to see you again soon!");
         printLine();
 
-        //echo implementation
+        //add list implementation
+        String[] list = new String[100];
         Scanner in = new Scanner(System.in);
+        int counter = 0;
 
         while (true){
             String line = in.nextLine();
 
             if (line.equals("bye")){
+                //saying bye and exiting
                 printLine();
                 System.out.println("Bye. Hope to see you again soon!");
                 printLine();
                 break;
             }
 
-            printLine();
-            System.out.println(line);
-            printLine();
-
+            if (line.equals("list")){
+                //print full list
+                printLine();
+                for(int i = 0; i<counter; i++){
+                    System.out.print((i + 1) + ". ");
+                    System.out.println(list[i]);
+                }
+                printLine();
+            } else {
+                list[counter] = line;
+                counter++;
+                //print added item
+                printLine();
+                System.out.print("added: ");
+                System.out.println(line);
+                printLine();
+            }
         }
     }
 
