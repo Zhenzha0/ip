@@ -4,8 +4,19 @@ import java.util.List;
 public class TaskList {
     private final List<Task> tasks = new ArrayList<>();
 
-    public void add(String description) {
-        tasks.add(new Task(description));
+    public int addTodo(String description) {
+        tasks.add(new Todo(description));
+        return tasks.size();
+    }
+
+    public int addDeadline(String description, String deadline) {
+        tasks.add(new Deadline(description, deadline));
+        return tasks.size();
+    }
+
+    public int addEvent(String description, String from, String to) {
+        tasks.add(new Event(description, from, to));
+        return tasks.size();
     }
 
     public int size() { return tasks.size(); }

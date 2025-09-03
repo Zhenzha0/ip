@@ -10,7 +10,7 @@ public class Zuke {
 
         while (true) {
             String line = in.nextLine();
-            Parser.Command c = Parser.parse(line);
+            CommandParser.Command c = CommandParser.parse(line);
 
             switch (c.type) {
             case BYE:
@@ -26,9 +26,14 @@ public class Zuke {
                 break;
 
             case MARK: {
-                if (tasks.isEmpty()) { Ui.error("Your list is empty. Add a task first."); break; }
-                Integer idx = Parser.parseIndexOrNull(c.arg, tasks.size());
-                if (idx == null) break;
+                if (tasks.isEmpty()) {
+                    Ui.error("Your list is empty. Add a task first."); break;
+                }
+                Integer idx = CommandParser.parseIndexOrNull(c.arg, tasks.size());
+                if (idx == null) {
+                    break;
+                }
+
                 tasks.mark(idx);
                 Ui.showMarked(tasks.get(idx), true);
                 break;
@@ -36,16 +41,36 @@ public class Zuke {
 
             case UNMARK: {
                 if (tasks.isEmpty()) { Ui.error("Your list is empty. Add a task first."); break; }
-                Integer idx = Parser.parseIndexOrNull(c.arg, tasks.size());
+                Integer idx = CommandParser.parseIndexOrNull(c.arg, tasks.size());
                 if (idx == null) break;
                 tasks.unmark(idx);
                 Ui.showMarked(tasks.get(idx), false);
                 break;
             }
 
-            case ADD:
-                tasks.add(c.arg);                 // c.arg == original line
-                Ui.showAdded(c.arg);
+            case TODO:{
+                int index = tasks.addTodo(c.arg);                 // c.arg == original line
+                Ui.showAdded(tasks, index);
+                break;
+            }
+
+            case DEADLINE: {
+                String[] arguments = DeadlineParser.argumentParser(c.arg);
+                int index = tasks.addDeadline(arguments[0], arguments[1]);
+                Ui.showAdded(tasks, index);
+                break;
+            }
+
+            case EVENT: {
+                String[] arguments = EventParser.argumentParser(c.arg);
+                int index = tasks.addEvent(arguments[0], arguments[1], arguments[2]);
+                Ui.showAdded(tasks, index);
+                break;
+            }
+
+
+            case UNKNOWN:
+
                 break;
             }
         }

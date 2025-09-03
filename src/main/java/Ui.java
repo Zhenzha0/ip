@@ -39,9 +39,10 @@ public class Ui {
         line();
     }
 
-    public static void showAdded(String desc) {
+    public static void showAdded(TaskList tasks, int index) {
         line();
-        System.out.println("added: " + desc);
+        System.out.println("Got it. I've added this task: ");
+        System.out.println(tasks.get(index - 1));
         line();
     }
 
