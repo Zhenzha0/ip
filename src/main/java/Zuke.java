@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Zuke {
@@ -49,28 +50,50 @@ public class Zuke {
             }
 
             case TODO:{
-                int index = tasks.addTodo(c.arg);                 // c.arg == original line
-                Ui.showAdded(tasks, index);
+                tasks.addTodo(c.arg);                 // c.arg == original line
+                Ui.showAdded(tasks);
                 break;
             }
 
             case DEADLINE: {
+                if(c.arg == null) {
+                    Ui.error("Bro stop trolling, you only entered the command...");
+                    break;
+                }
+
                 String[] arguments = DeadlineParser.argumentParser(c.arg);
-                int index = tasks.addDeadline(arguments[0], arguments[1]);
-                Ui.showAdded(tasks, index);
+                String argumentErrors = DeadlineParser.checkArgumentFormat(arguments[0], arguments[1]);
+                if(!argumentErrors.isEmpty()) {
+                    Ui.error("The following parts are empty:" + argumentErrors + "\nplease enter an event with valid format.");
+                    break;
+                }
+
+                tasks.addDeadline(arguments[0], arguments[1]);
+                Ui.showAdded(tasks);
                 break;
             }
 
             case EVENT: {
+                if(c.arg == null) {
+                    Ui.error("Bro stop trolling, you only entered the command...");
+                    break;
+                }
+
                 String[] arguments = EventParser.argumentParser(c.arg);
-                int index = tasks.addEvent(arguments[0], arguments[1], arguments[2]);
-                Ui.showAdded(tasks, index);
+                String argumentErrors = EventParser.checkArgumentFormat(arguments[0], arguments[1], arguments[2]);
+                if(!argumentErrors.isEmpty()) {
+                    Ui.error("The following parts are empty:" + argumentErrors + "\nplease enter an event with valid format.");
+                    break;
+                }
+
+                tasks.addEvent(arguments[0], arguments[1], arguments[2]);
+                Ui.showAdded(tasks);
                 break;
             }
 
 
             case UNKNOWN:
-
+                Ui.error("Unknown command, please follow format");
                 break;
             }
         }

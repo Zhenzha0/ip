@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class EventParser {
     public static String[] argumentParser(String argument){
         String[] words = argument.split("\\s+");
@@ -7,13 +10,11 @@ public class EventParser {
         String currentFlag = "description";// split by whitespace
 
         for (int i = 0; i < words.length; i++) {
-            if (words[i].equalsIgnoreCase("/by") && i + 1 < words.length) {
-                currentFlag = "by";
-                continue;
-            } else if (words[i].equalsIgnoreCase("/from") && i + 1 < words.length) {
+
+            if (words[i].equalsIgnoreCase("/from")) {
                 currentFlag = "from";
                 continue;
-            } else if (words[i].equalsIgnoreCase("/to") && i + 1 < words.length) {
+            } else if (words[i].equalsIgnoreCase("/to")) {
                 currentFlag = "to";
                 continue;
             }
@@ -38,4 +39,23 @@ public class EventParser {
         return parsedArgument;
 
     }
+
+
+
+    public static String checkArgumentFormat(String description, String from , String to) {
+        String errors = "";
+        if (description.isEmpty()) {
+            errors += "\n-description";
+        }
+        if (from.isEmpty()) {
+            errors += "\n-from";
+        }
+        if (to.isEmpty()) {
+            errors += "\n-to";
+        }
+
+        return errors;
+    }
+
+
 }
