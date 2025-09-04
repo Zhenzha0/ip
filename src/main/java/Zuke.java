@@ -50,6 +50,10 @@ public class Zuke {
             }
 
             case TODO:{
+                if(c.arg == null) {
+                    Ui.error("Bro stop trolling, you only entered the command...");
+                    break;
+                }
                 tasks.addTodo(c.arg);                 // c.arg == original line
                 Ui.showAdded(tasks);
                 break;
