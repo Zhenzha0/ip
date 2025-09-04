@@ -1,3 +1,5 @@
+import com.sun.source.util.TaskListener;
+
 public class Ui {
     public static void line() {
         System.out.println("____________________________________________________________");
@@ -43,6 +45,7 @@ public class Ui {
         line();
         System.out.println("Got it. I've added this task: ");
         System.out.println(tasks.get(tasks.size() - 1));
+        showCurrentTaskSize(tasks);
         line();
     }
 
@@ -53,6 +56,10 @@ public class Ui {
                 : "OK, I've marked this task as not done yet:");
         System.out.println("  " + t);
         line();
+    }
+
+    public static void showCurrentTaskSize(TaskList tasks) {
+        System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
     }
 }
 
