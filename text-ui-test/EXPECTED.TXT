@@ -1,7 +1,122 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+$$$$$$$$\ $$\   $$\ $$\   $$\ $$$$$$$$\
+\____$$  |$$ |  $$ |$$ | $$  |$$  _____|
+    $$  / $$ |  $$ |$$ |$$  / $$ |
+   $$  /  $$ |  $$ |$$$$$  /  $$$$$\
+  $$  /   $$ |  $$ |$$  $$<   $$  __|
+ $$  /    $$ |  $$ |$$ |\$$\  $$ |
+$$$$$$$$\ \$$$$$$  |$$ | \$$\ $$$$$$$$\
+\________| \______/ \__|  \__|\________|
 
+____________________________________________________________
+Hello! I'm Zuke
+What can I do for you?
+____________________________________________________________
+todo borrow book
+____________________________________________________________
+Got it. I've added this task:
+[T][ ] borrow book
+Now you have 1 tasks in the list.
+____________________________________________________________
+event read book /from 7pm /to 9pm
+____________________________________________________________
+Got it. I've added this task:
+[E][ ] read book (from: 7pm to: 9pm)
+Now you have 2 tasks in the list.
+____________________________________________________________
+deadline return book /by Sunday
+____________________________________________________________
+Got it. I've added this task:
+[D][ ] return book (by: Sunday)
+Now you have 3 tasks in the list.
+____________________________________________________________
+list
+____________________________________________________________
+Here are the tasks in your list:
+1. [T][ ] borrow book
+2. [E][ ] read book (from: 7pm to: 9pm)
+3. [D][ ] return book (by: Sunday)
+____________________________________________________________
+mark 1
+____________________________________________________________
+Nice! I've marked this task as done:
+  [T][X] borrow book
+____________________________________________________________
+mark 2
+____________________________________________________________
+Nice! I've marked this task as done:
+  [E][X] read book (from: 7pm to: 9pm)
+____________________________________________________________
+list
+____________________________________________________________
+Here are the tasks in your list:
+1. [T][X] borrow book
+2. [E][X] read book (from: 7pm to: 9pm)
+3. [D][ ] return book (by: Sunday)
+____________________________________________________________
+unmark 1
+____________________________________________________________
+OK, I've marked this task as not done yet:
+  [T][ ] borrow book
+____________________________________________________________
+list
+____________________________________________________________
+Here are the tasks in your list:
+1. [T][ ] borrow book
+2. [E][X] read book (from: 7pm to: 9pm)
+3. [D][ ] return book (by: Sunday)
+____________________________________________________________
+oiii
+____________________________________________________________
+Error: Unknown command, please follow format
+____________________________________________________________
+todo
+____________________________________________________________
+Error: Bro stop trolling, you only entered the command...
+____________________________________________________________
+event
+____________________________________________________________
+Error: Bro stop trolling, you only entered the command...
+____________________________________________________________
+deadline
+____________________________________________________________
+Error: Bro stop trolling, you only entered the command...
+____________________________________________________________
+event hello
+____________________________________________________________
+Error: The following parts are empty:
+-from
+-to
+please enter an event with valid format.
+____________________________________________________________
+event /from 10pm
+____________________________________________________________
+Error: The following parts are empty:
+-description
+-to
+please enter an event with valid format.
+____________________________________________________________
+deadline return book
+____________________________________________________________
+Error: The following parts are empty:
+-by
+please enter an event with valid format.
+____________________________________________________________
+deadline /by
+____________________________________________________________
+Error: The following parts are empty:
+-description
+-by
+please enter an event with valid format.
+____________________________________________________________
+deadline /by 10pm
+____________________________________________________________
+Error: The following parts are empty:
+-description
+please enter an event with valid format.
+____________________________________________________________
+bye
+____________________________________________________________
+Bye. Hope to see you again soon!
+____________________________________________________________
+
+ahhahahah

@@ -1,0 +1,19 @@
+todo borrow book
+event read book /from 7pm /to 9pm
+deadline return book /by Sunday
+list
+mark 1
+mark 2
+list
+unmark 1
+list
+oiii
+todo
+event
+deadline
+event hello
+event /from 10pm
+deadline return book
+deadline /by
+deadline /by 10pm
+bye
