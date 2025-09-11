@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+package Task.Parser;
 
 public class EventParser {
     public static String[] argumentParser(String argument){

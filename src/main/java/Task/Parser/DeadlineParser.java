@@ -1,3 +1,5 @@
+package Task.Parser;
+
 public class DeadlineParser {
     public static String[] argumentParser(String argument){
         String[] parsedArgument = new String[2];

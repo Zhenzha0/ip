@@ -1,3 +1,5 @@
+package Exception;
+
 public class ZukeException {
     public static class UnknowInputException extends Exception {
         public UnknowInputException() {
