@@ -6,17 +6,17 @@ public class DeadlineParser {
         StringBuilder dateBuilder = new StringBuilder();
         String currentFlag = "description";// split by whitespace
 
-        for (int i = 0; i < words.length; i++) {
-            if (words[i].equalsIgnoreCase("/by")) {
+        for (String word : words) {
+            if (word.equalsIgnoreCase("/by")) {
                 currentFlag = "by";
                 continue;
             }
 
-            if(currentFlag.equals("description")){
-                descriptionBuilder.append(words[i]);
+            if (currentFlag.equals("description")) {
+                descriptionBuilder.append(word);
                 descriptionBuilder.append(" ");
             } else {
-                dateBuilder.append(words[i]);
+                dateBuilder.append(word);
                 dateBuilder.append(" ");
             }
         }

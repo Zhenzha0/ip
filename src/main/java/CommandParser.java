@@ -31,19 +31,22 @@ public class CommandParser {
 
     /** returns zero-based index or null (and prints error via Ui) */
     public static Integer parseIndexOrNull(String text, int max) {
-        if (text == null) {
-            Ui.error("Please provide an index, e.g., 'mark 2'.");
-            return null;
-        }
+
         try {
+            if (text == null) {
+                throw new ZukeException.MissingIndexException();
+            }
+
             int idx1 = Integer.parseInt(text);
             if (idx1 < 1 || idx1 > max) {
-                Ui.error("Index out of range. Valid: 1.." + max + ".");
-                return null;
+                throw new ZukeException.IndexOutOfRangeException(max);
             }
             return idx1 - 1;
         } catch (NumberFormatException e) {
             Ui.error("Index must be a number, e.g., 'unmark 3'.");
+            return null;
+        } catch (ZukeException.MissingIndexException | ZukeException.IndexOutOfRangeException e) {
+            Ui.error(e.getMessage());
             return null;
         }
     }
