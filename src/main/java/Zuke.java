@@ -13,93 +13,144 @@ public class Zuke {
             String line = in.nextLine();
             CommandParser.Command c = CommandParser.parse(line);
 
-            switch (c.type) {
-            case BYE:
-                Ui.bye();
-                return;
+            try{
+                switch (c.type) {
+                case BYE:
+                    Ui.bye();
+                    return;
 
-            case LIST:
-                if (tasks.isEmpty()) {
-                    Ui.error("Your list is empty. Add a task first.");
-                } else {
-                    Ui.showList(tasks);
-                }
-                break;
+                case LIST:
+                    try {
+                        if (tasks.isEmpty()) {
+                            throw new ZukeException.EmptyListException();
+                        } else {
+                            Ui.showList(tasks);
+                            break;
+                        }
+                    } catch (ZukeException.EmptyListException e) {
+                        Ui.error(e.getMessage());
+                        break;
+                    }
 
-            case MARK: {
-                if (tasks.isEmpty()) {
-                    Ui.error("Your list is empty. Add a task first."); break;
-                }
-                Integer idx = CommandParser.parseIndexOrNull(c.arg, tasks.size());
-                if (idx == null) {
-                    break;
+
+                case MARK: {
+
+                    try {
+                        if (tasks.isEmpty()) {
+                            throw new ZukeException.EmptyListException();
+                        } else {
+                            Integer idx = CommandParser.parseIndexOrNull(c.arg, tasks.size());
+                            if (idx == null) {
+                                break;
+                            }
+
+                            tasks.mark(idx);
+                            Ui.showMarked(tasks.get(idx), true);
+                            break;
+                        }
+                    } catch (ZukeException.EmptyListException e) {
+                        Ui.error(e.getMessage());
+                        break;
+                    }
+
                 }
 
-                tasks.mark(idx);
-                Ui.showMarked(tasks.get(idx), true);
-                break;
+                case UNMARK: {
+
+                    try {
+                        if (tasks.isEmpty()) {
+                            throw new ZukeException.EmptyListException();
+                        } else {
+                            Integer idx = CommandParser.parseIndexOrNull(c.arg, tasks.size());
+                            if (idx == null) break;
+                            tasks.unmark(idx);
+                            Ui.showMarked(tasks.get(idx), false);
+                            break;
+                        }
+                    } catch (ZukeException.EmptyListException e) {
+                        Ui.error(e.getMessage());
+                        break;
+                    }
+                }
+
+                case TODO:{
+
+                    try {
+                        if(c.arg == null) {
+                            throw new ZukeException.MissingDescriptionException();
+                        }
+                        tasks.addTodo(c.arg);                 // c.arg == original line
+                        Ui.showAdded(tasks);
+                        break;
+
+                    } catch (ZukeException.MissingDescriptionException e) {
+                        Ui.error(e.getMessage());
+                        break;
+                    }
+
+                }
+
+                case DEADLINE: {
+
+
+
+                    try {
+                        if(c.arg == null) {
+                            throw new ZukeException.MissingDescriptionException();
+                        }
+
+                        String[] arguments = DeadlineParser.argumentParser(c.arg);
+                        String argumentErrors = DeadlineParser.checkArgumentFormat(arguments[0], arguments[1]);
+                        if(!argumentErrors.isEmpty()) {
+                            throw new ZukeException.MissingArgumentException("The following parts are empty:" + argumentErrors + "\nplease enter an event with valid format.");
+                        }
+
+                        tasks.addEvent(arguments[0], arguments[1], arguments[2]);
+                        Ui.showAdded(tasks);
+                        break;
+
+                    } catch (ZukeException.MissingDescriptionException | ZukeException.MissingArgumentException e) {
+                        Ui.error(e.getMessage());
+                        break;
+
+                    }
+                }
+
+                case EVENT: {
+
+                    try {
+                        if(c.arg == null) {
+                            throw new ZukeException.MissingDescriptionException();
+                        }
+
+                        String[] arguments = EventParser.argumentParser(c.arg);
+                        String argumentErrors = EventParser.checkArgumentFormat(arguments[0], arguments[1], arguments[2]);
+                        if(!argumentErrors.isEmpty()) {
+                            throw new ZukeException.MissingArgumentException("The following parts are empty:" + argumentErrors + "\nplease enter an event with valid format.");
+                        }
+
+                        tasks.addEvent(arguments[0], arguments[1], arguments[2]);
+                        Ui.showAdded(tasks);
+                        break;
+
+                    } catch (ZukeException.MissingDescriptionException | ZukeException.MissingArgumentException e) {
+                        Ui.error(e.getMessage());
+                        break;
+
+                    }
+
+                }
+
+
+                case UNKNOWN:
+                    throw new ZukeException.UnknowInputException();
+                }
+
+            } catch (ZukeException.UnknowInputException e) {
+                Ui.error(e.getMessage());
             }
 
-            case UNMARK: {
-                if (tasks.isEmpty()) { Ui.error("Your list is empty. Add a task first."); break; }
-                Integer idx = CommandParser.parseIndexOrNull(c.arg, tasks.size());
-                if (idx == null) break;
-                tasks.unmark(idx);
-                Ui.showMarked(tasks.get(idx), false);
-                break;
-            }
 
-            case TODO:{
-                if(c.arg == null) {
-                    Ui.error("Bro stop trolling, you only entered the command...");
-                    break;
-                }
-                tasks.addTodo(c.arg);                 // c.arg == original line
-                Ui.showAdded(tasks);
-                break;
-            }
-
-            case DEADLINE: {
-                if(c.arg == null) {
-                    Ui.error("Bro stop trolling, you only entered the command...");
-                    break;
-                }
-
-                String[] arguments = DeadlineParser.argumentParser(c.arg);
-                String argumentErrors = DeadlineParser.checkArgumentFormat(arguments[0], arguments[1]);
-                if(!argumentErrors.isEmpty()) {
-                    Ui.error("The following parts are empty:" + argumentErrors + "\nplease enter an event with valid format.");
-                    break;
-                }
-
-                tasks.addDeadline(arguments[0], arguments[1]);
-                Ui.showAdded(tasks);
-                break;
-            }
-
-            case EVENT: {
-                if(c.arg == null) {
-                    Ui.error("Bro stop trolling, you only entered the command...");
-                    break;
-                }
-
-                String[] arguments = EventParser.argumentParser(c.arg);
-                String argumentErrors = EventParser.checkArgumentFormat(arguments[0], arguments[1], arguments[2]);
-                if(!argumentErrors.isEmpty()) {
-                    Ui.error("The following parts are empty:" + argumentErrors + "\nplease enter an event with valid format.");
-                    break;
-                }
-
-                tasks.addEvent(arguments[0], arguments[1], arguments[2]);
-                Ui.showAdded(tasks);
-                break;
-            }
-
-
-            case UNKNOWN:
-                Ui.error("Unknown command, please follow format");
-                break;
-            }
         }
     }
 }
