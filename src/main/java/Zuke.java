@@ -26,125 +26,88 @@ public class Zuke {
                     return;
 
                 case LIST:
-                    try {
-                        if (tasks.isEmpty()) {
-                            throw new ZukeException.EmptyListException();
-                        } else {
-                            Ui.showList(tasks);
-                            break;
-                        }
-                    } catch (ZukeException.EmptyListException e) {
-                        Ui.error(e.getMessage());
-                        break;
+                    if (tasks.isEmpty()) {
+                        throw new ZukeException.EmptyListException();
                     }
+
+                    Ui.showList(tasks);
+                    break;
 
 
                 case MARK: {
 
-                    try {
+
                         if (tasks.isEmpty()) {
                             throw new ZukeException.EmptyListException();
-                        } else {
-                            Integer idx = CommandParser.parseIndexOrNull(c.arg, tasks.size());
-                            if (idx == null) {
-                                break;
-                            }
+                        }
 
-                            tasks.mark(idx);
-                            Ui.showMarked(tasks.get(idx), true);
+                        Integer idx = CommandParser.parseIndexOrNull(c.arg, tasks.size());
+                        if (idx == null) {
                             break;
                         }
-                    } catch (ZukeException.EmptyListException e) {
-                        Ui.error(e.getMessage());
-                        break;
-                    }
 
+                        tasks.mark(idx);
+                        Ui.showMarked(tasks.get(idx), true);
+                        break;
                 }
 
                 case UNMARK: {
 
-                    try {
-                        if (tasks.isEmpty()) {
-                            throw new ZukeException.EmptyListException();
-                        } else {
-                            Integer idx = CommandParser.parseIndexOrNull(c.arg, tasks.size());
-                            if (idx == null) break;
-                            tasks.unmark(idx);
-                            Ui.showMarked(tasks.get(idx), false);
-                            break;
-                        }
-                    } catch (ZukeException.EmptyListException e) {
-                        Ui.error(e.getMessage());
-                        break;
+
+                    if (tasks.isEmpty()) {
+                        throw new ZukeException.EmptyListException();
                     }
+
+                    Integer idx = CommandParser.parseIndexOrNull(c.arg, tasks.size());
+                    if (idx == null) break;
+                    tasks.unmark(idx);
+                    Ui.showMarked(tasks.get(idx), false);
+                    break;
+
+
                 }
 
-                case TODO:{
-
-                    try {
-                        if(c.arg == null) {
-                            throw new ZukeException.MissingDescriptionException();
-                        }
-                        tasks.addTodo(c.arg);                 // c.arg == original line
-                        Ui.showAdded(tasks);
-                        break;
-
-                    } catch (ZukeException.MissingDescriptionException e) {
-                        Ui.error(e.getMessage());
-                        break;
+                case TODO: {
+                    if(c.arg == null) {
+                        throw new ZukeException.MissingDescriptionException();
                     }
 
+                    tasks.addTodo(c.arg);                 // c.arg == original line
+                    Ui.showAdded(tasks);
+                    break;
                 }
 
                 case DEADLINE: {
-
-
-
-                    try {
-                        if(c.arg == null) {
-                            throw new ZukeException.MissingDescriptionException();
-                        }
-
-                        String[] arguments = DeadlineParser.argumentParser(c.arg);
-                        String argumentErrors = DeadlineParser.checkArgumentFormat(arguments[0], arguments[1]);
-                        if(!argumentErrors.isEmpty()) {
-                            throw new ZukeException.MissingArgumentException("The following parts are empty:" + argumentErrors + "\nplease enter an event with valid format.");
-                        }
-
-                        tasks.addEvent(arguments[0], arguments[1], arguments[2]);
-                        Ui.showAdded(tasks);
-                        break;
-
-                    } catch (ZukeException.MissingDescriptionException | ZukeException.MissingArgumentException e) {
-                        Ui.error(e.getMessage());
-                        break;
-
+                    if(c.arg == null) {
+                        throw new ZukeException.MissingDescriptionException();
                     }
+
+                    String[] arguments = DeadlineParser.argumentParser(c.arg);
+                    String argumentErrors = DeadlineParser.checkArgumentFormat(arguments[0], arguments[1]);
+
+                    if(!argumentErrors.isEmpty()) {
+                        throw new ZukeException.MissingArgumentException("The following parts are empty:" + argumentErrors + "\nplease enter an event with valid format.");
+                    }
+
+                    tasks.addDeadline(arguments[0], arguments[1]);
+                    Ui.showAdded(tasks);
+                    break;
                 }
 
                 case EVENT: {
-
-                    try {
-                        if(c.arg == null) {
-                            throw new ZukeException.MissingDescriptionException();
-                        }
-
-                        String[] arguments = EventParser.argumentParser(c.arg);
-                        String argumentErrors = EventParser.checkArgumentFormat(arguments[0], arguments[1], arguments[2]);
-                        if(!argumentErrors.isEmpty()) {
-                            throw new ZukeException.MissingArgumentException("The following parts are empty:" + argumentErrors + "\nplease enter an event with valid format.");
-                        }
-
-                        tasks.addEvent(arguments[0], arguments[1], arguments[2]);
-                        Ui.showAdded(tasks);
-                        break;
-
-                    } catch (ZukeException.MissingDescriptionException | ZukeException.MissingArgumentException e) {
-                        Ui.error(e.getMessage());
-                        break;
-
+                    if(c.arg == null) {
+                        throw new ZukeException.MissingDescriptionException();
                     }
 
+                    String[] arguments = EventParser.argumentParser(c.arg);
+                    String argumentErrors = EventParser.checkArgumentFormat(arguments[0], arguments[1], arguments[2]);
+                    if(!argumentErrors.isEmpty()) {
+                        throw new ZukeException.MissingArgumentException("The following parts are empty:" + argumentErrors + "\nplease enter an event with valid format.");
+                    }
+
+                    tasks.addEvent(arguments[0], arguments[1], arguments[2]);
+                    Ui.showAdded(tasks);
+                    break;
                 }
 
 
@@ -152,7 +115,7 @@ public class Zuke {
                     throw new ZukeException.UnknowInputException();
                 }
 
-            } catch (ZukeException.UnknowInputException e) {
+            } catch (ZukeException.UnknowInputException | ZukeException.MissingArgumentException | ZukeException.EmptyListException | ZukeException.MissingDescriptionException e) {
                 Ui.error(e.getMessage());
             }
 
