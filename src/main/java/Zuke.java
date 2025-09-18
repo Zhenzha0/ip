@@ -37,6 +37,11 @@ public class Zuke {
                 switch (c.type) {
                 case BYE:
                     Ui.bye();
+                    try {
+                        Memory.Save.save(tasks);
+                    } catch (IOException e) {
+                        System.out.println(e.getMessage());
+                    }
                     return;
 
                 case LIST:
@@ -133,11 +138,7 @@ public class Zuke {
                 Ui.error(e.getMessage());
             }
 
-            try {
-                Memory.Save.save(tasks);
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
+
 
 
 
