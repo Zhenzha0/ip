@@ -9,6 +9,10 @@ public class Deadline extends Task {
         setDeadline(deadline);
     }
 
+    public String getDeadline() {
+        return deadline;
+    }
+
     public String getDate() {
         return deadline;
     }

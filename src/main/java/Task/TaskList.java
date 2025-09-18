@@ -33,12 +33,16 @@ public class TaskList {
         tasks.get(zeroBasedIndex).unmark();
     }
 
+
     public Task delete(int zeroBasedIndex) {
         Task returnTask = tasks.get(zeroBasedIndex);
         tasks.remove(zeroBasedIndex);
         return returnTask;
 
     }
+
+public List<Task> getTasks() { return tasks; }
+
 
     public String render() {
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
