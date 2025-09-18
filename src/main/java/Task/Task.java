@@ -31,4 +31,8 @@ public class Task {
         return marker() + " " + description;
     }
 
+    public boolean getDone() {
+        return done;
+    }
+
 }

@@ -5,6 +5,8 @@ import Task.TaskList;
 import App.Ui;
 import Exception.ZukeException;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Zuke {
@@ -13,6 +15,18 @@ public class Zuke {
         Ui.hello();
 
         TaskList tasks = new TaskList();
+
+        try {
+            System.out.println("Loading data...");
+            Memory.Save.load(tasks);
+            System.out.println("Done loading data");
+
+        } catch (FileNotFoundException e) {
+            System.out.println("No previous data available, start adding your task now");
+        }
+
+
+
         Scanner in = new Scanner(System.in);
 
         while (true) {
@@ -118,6 +132,13 @@ public class Zuke {
             } catch (ZukeException.UnknowInputException | ZukeException.MissingArgumentException | ZukeException.EmptyListException | ZukeException.MissingDescriptionException e) {
                 Ui.error(e.getMessage());
             }
+
+            try {
+                Memory.Save.save(tasks);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+
 
 
         }
