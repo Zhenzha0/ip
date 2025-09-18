@@ -33,6 +33,13 @@ public class TaskList {
         tasks.get(zeroBasedIndex).unmark();
     }
 
+    public Task delete(int zeroBasedIndex) {
+        Task returnTask = tasks.get(zeroBasedIndex);
+        tasks.remove(zeroBasedIndex);
+        return returnTask;
+
+    }
+
     public String render() {
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {

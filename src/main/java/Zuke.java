@@ -1,6 +1,7 @@
 import Task.Parser.CommandParser;
 import Task.Parser.DeadlineParser;
 import Task.Parser.EventParser;
+import Task.Task;
 import Task.TaskList;
 import App.Ui;
 import Exception.ZukeException;
@@ -108,6 +109,22 @@ public class Zuke {
                     tasks.addEvent(arguments[0], arguments[1], arguments[2]);
                     Ui.showAdded(tasks);
                     break;
+                }
+
+                case DELETE: {
+                    if (tasks.isEmpty()) {
+                        throw new ZukeException.EmptyListException();
+                    }
+
+                    Integer idx = CommandParser.parseIndexOrNull(c.arg, tasks.size());
+                    if (idx == null) {
+                        break;
+                    }
+
+                    Task deletedTask = tasks.delete(idx);
+                    Ui.showDeleted(deletedTask, tasks);
+                    break;
+
                 }
 
 
