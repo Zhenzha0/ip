@@ -52,6 +52,14 @@ public class Ui {
         line();
     }
 
+    public static void showDeleted(Task deletedTasks, TaskList tasks) {
+        line();
+        System.out.println("Got it. I've deleted this task: ");
+        System.out.println(deletedTasks);
+        showCurrentTaskSize(tasks);
+        line();
+    }
+
     public static void showMarked(Task t, boolean nowDone) {
         line();
         System.out.println(nowDone
