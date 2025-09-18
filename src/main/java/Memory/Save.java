@@ -39,8 +39,10 @@ public class Save {
             }
 
             FileWriter fw = new FileWriter(file);
+
             if(tasks.getTasks().isEmpty()){
                 System.out.println("Nothing to save");
+                fw.close();
                 file.delete();
                 return;
             }
