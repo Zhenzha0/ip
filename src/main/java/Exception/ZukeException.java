@@ -17,7 +17,7 @@ public class ZukeException {
     // Exception for too many operations
     public static class MissingArgumentException extends Exception {
         public MissingArgumentException(String message) {
-            super(message);
+            super("The following parts are empty:" + message + "\nplease enter an event with valid format.");
         }
     }
 

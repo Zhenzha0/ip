@@ -12,10 +12,13 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Zuke {
-    public static void main(String[] args) {
+    private Storage storage;
+    private TaskList tasks;
+
+    public Zuke(String filepath) {
         Ui.welcome();
-        TaskList tasks = new TaskList();
-        Storage storage = new Storage("data/zuke.text");
+        tasks = new TaskList();
+        storage = new Storage(filepath);
 
         try {
             storage.load(tasks);
@@ -23,7 +26,9 @@ public class Zuke {
         } catch (FileNotFoundException e) {
             Ui.showNoStorageFile();
         }
+    }
 
+    public void run() {
         Scanner in = new Scanner(System.in);
 
         while (true) {
@@ -49,18 +54,18 @@ public class Zuke {
 
 
                 case MARK: {
-                        if (tasks.isEmpty()) {
-                            throw new ZukeException.EmptyListException();
-                        }
+                    if (tasks.isEmpty()) {
+                        throw new ZukeException.EmptyListException();
+                    }
 
-                        Integer idx = CommandParser.parseIndexOrNull(c.arg, tasks.size());
-                        if (idx == null) {
-                            break;
-                        }
-
-                        tasks.mark(idx);
-                        Ui.showMarked(tasks.get(idx), true);
+                    Integer idx = CommandParser.parseIndexOrNull(c.arg, tasks.size());
+                    if (idx == null) {
                         break;
+                    }
+
+                    tasks.mark(idx);
+                    Ui.showMarked(tasks.get(idx), true);
+                    break;
                 }
 
                 case UNMARK: {
@@ -110,7 +115,7 @@ public class Zuke {
                     String[] arguments = EventParser.argumentParser(c.arg);
                     String argumentErrors = EventParser.checkArgumentFormat(arguments[0], arguments[1], arguments[2]);
                     if(!argumentErrors.isEmpty()) {
-                        throw new ZukeException.MissingArgumentException("The following parts are empty:" + argumentErrors + "\nplease enter an event with valid format.");
+                        throw new ZukeException.MissingArgumentException(argumentErrors);
                     }
 
                     tasks.addEvent(arguments[0], arguments[1], arguments[2]);
@@ -142,5 +147,9 @@ public class Zuke {
             }
 
         }
+    }
+
+    public static void main(String[] args) {
+        new Zuke("data/zuke.text").run();
     }
 }
