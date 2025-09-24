@@ -1,5 +1,6 @@
 package Memory;
 
+import App.Ui;
 import Task.Task;
 import Task.TaskList;
 import java.io.File;
@@ -12,24 +13,35 @@ import Task.Event;
 import java.io.FileWriter;
 
 
-public class Save {
+public class Storage {
 
-    public static String filePath = "data/zuke.text";
+    private String filePath;
 
-    public static void load(TaskList tasks) throws FileNotFoundException {
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public Storage(String filePath) {
+        setFilePath(filePath);
+
+    }
+
+    public void load(TaskList tasks) throws FileNotFoundException {
+        Ui.showLoadingData();
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f);
         if (f.length() == 0) {
-            System.out.println("File is empty");
+            System.out.println("Data file is empty");
             return;
         }
         while(s.hasNextLine()){
             String line = s.nextLine();
             tasks.getTasks().add(MemoryParser.parseline(line));
         }
+        Ui.showDoneLoadingData();
     }
 
-    public static void save(TaskList tasks) throws IOException {
+    public void save(TaskList tasks) throws IOException {
         try{
 
             File file = new File(filePath);

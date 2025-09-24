@@ -1,4 +1,5 @@
-import Task.Parser.CommandParser;
+import Command.CommandParser;
+import Memory.Storage;
 import Task.Parser.DeadlineParser;
 import Task.Parser.EventParser;
 import Task.Task;
@@ -12,21 +13,16 @@ import java.util.Scanner;
 
 public class Zuke {
     public static void main(String[] args) {
-        Ui.logo();
-        Ui.hello();
-
+        Ui.welcome();
         TaskList tasks = new TaskList();
+        Storage storage = new Storage("data/zuke.text");
 
         try {
-            System.out.println("Loading data...");
-            Memory.Save.load(tasks);
-            System.out.println("Done loading data");
+            storage.load(tasks);
 
         } catch (FileNotFoundException e) {
-            System.out.println("No previous data available, start adding your task now");
+            Ui.showNoStorageFile();
         }
-
-
 
         Scanner in = new Scanner(System.in);
 
@@ -38,11 +34,9 @@ public class Zuke {
                 switch (c.type) {
                 case BYE:
                     Ui.bye();
-                    try {
-                        Memory.Save.save(tasks);
-                    } catch (IOException e) {
-                        System.out.println(e.getMessage());
-                    }
+
+                    storage.save(tasks);
+
                     return;
 
                 case LIST:
@@ -55,8 +49,6 @@ public class Zuke {
 
 
                 case MARK: {
-
-
                         if (tasks.isEmpty()) {
                             throw new ZukeException.EmptyListException();
                         }
@@ -72,8 +64,6 @@ public class Zuke {
                 }
 
                 case UNMARK: {
-
-
                     if (tasks.isEmpty()) {
                         throw new ZukeException.EmptyListException();
                     }
@@ -83,8 +73,6 @@ public class Zuke {
                     tasks.unmark(idx);
                     Ui.showMarked(tasks.get(idx), false);
                     break;
-
-
                 }
 
                 case TODO: {
@@ -143,21 +131,15 @@ public class Zuke {
                     Task deletedTask = tasks.delete(idx);
                     Ui.showDeleted(deletedTask, tasks);
                     break;
-
                 }
-
 
                 case UNKNOWN:
                     throw new ZukeException.UnknowInputException();
                 }
 
-            } catch (ZukeException.UnknowInputException | ZukeException.MissingArgumentException | ZukeException.EmptyListException | ZukeException.MissingDescriptionException e) {
+            } catch (ZukeException.UnknowInputException | ZukeException.MissingArgumentException | ZukeException.EmptyListException | ZukeException.MissingDescriptionException | IOException e) {
                 Ui.error(e.getMessage());
             }
-
-
-
-
 
         }
     }

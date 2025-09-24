@@ -26,6 +26,11 @@ public class Ui {
         line();
     }
 
+    public static void welcome() {
+        logo();
+        hello();
+    }
+
     public static void bye() {
         line();
         System.out.println("Bye. Hope to see you again soon!");
@@ -71,6 +76,19 @@ public class Ui {
 
     public static void showCurrentTaskSize(TaskList tasks) {
         System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
+    }
+
+    public static void showNoStorageFile() {
+        System.out.println("No previous data available, start adding your task now");
+    }
+
+    public static void showLoadingData() {
+        System.out.println("Loading data...");
+    }
+
+    public static void showDoneLoadingData() {
+        System.out.println("Done loading data");
+        line();
     }
 }
 

@@ -1,4 +1,4 @@
-package Task.Parser;
+package Command;
 
 import Exception.ZukeException;
 import App.Ui;
