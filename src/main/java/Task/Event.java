@@ -1,29 +1,38 @@
 package Task;
 
+import Task.Parser.EventParser;
+import Task.Parser.DateTimeParser;
+
 public class Event extends Task {
 
-    private String from;
-    private String to;
+    private DateTimeParser from;
+    private DateTimeParser to;
 
-    public Event(String description, String from, String to) {
+    public Event(String description, DateTimeParser from, DateTimeParser to) {
         super(description);
         setFrom(from);
         setTo(to);
     }
 
-    public void setFrom(String from) {
+    public Event(EventParser parsedEvent) {
+        super(parsedEvent.getDescription());
+        setFrom(parsedEvent.getFrom());
+        setTo(parsedEvent.getTo());
+    }
+
+    public void setFrom(DateTimeParser from) {
         this.from = from;
     }
 
-    public void setTo(String to) {
+    public void setTo(DateTimeParser to) {
         this.to = to;
     }
 
-    public String getFrom() {
+    public DateTimeParser getFrom() {
         return from;
     }
 
-    public String getTo() {
+    public DateTimeParser getTo() {
         return to;
     }
 
@@ -34,6 +43,14 @@ public class Event extends Task {
 
     public String toString() {
         return marker() + " " + description + " (" + "from: " + from + " to: " + to + ")";
+    }
+
+    public String toMemoryFrom() {
+        return from.toMemoryDateTime();
+    }
+
+    public String toMemoryTo() {
+        return to.toMemoryDateTime();
     }
 
 }

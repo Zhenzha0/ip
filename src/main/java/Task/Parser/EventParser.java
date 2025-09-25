@@ -1,7 +1,39 @@
 package Task.Parser;
 
+import Exception.ZukeException;
+
 public class EventParser {
-    public static String[] argumentParser(String argument){
+    private String description;
+    DateTimeParser from;
+    DateTimeParser to;
+    private String errors = "";
+
+    public String getErrors() {
+        return errors;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public DateTimeParser getFrom() {
+        return from;
+    }
+
+    public DateTimeParser getTo() {
+        return to;
+    }
+
+
+
+    public EventParser(String argument) throws ZukeException.MissingArgumentException {
+        argumentParser(argument);
+        if(!errors.isEmpty()) {
+            throw new ZukeException.MissingArgumentException(errors);
+        }
+    }
+
+    public void argumentParser(String argument){
         String[] words = argument.split("\\s+");
         StringBuilder descriptionBuilder = new StringBuilder();
         StringBuilder fromBuilder = new StringBuilder();
@@ -31,30 +63,27 @@ public class EventParser {
 
         }
 
-        String[] parsedArgument = new String[3];
-        parsedArgument[0] = descriptionBuilder.toString().trim();
-        parsedArgument[1] = fromBuilder.toString().trim();
-        parsedArgument[2] = toBuilder.toString().trim();
-        return parsedArgument;
-
-    }
-
-
-
-    public static String checkArgumentFormat(String description, String from , String to) {
-        String errors = "";
+        description = descriptionBuilder.toString().trim();
         if (description.isEmpty()) {
             errors += "\n-description";
         }
-        if (from.isEmpty()) {
+
+        try {
+            from = new DateTimeParser(fromBuilder.toString().trim());
+
+        } catch (ZukeException.MissingTimeException e) {
             errors += "\n-from";
         }
-        if (to.isEmpty()) {
+
+        try {
+            to = new DateTimeParser(toBuilder.toString().trim());
+
+        } catch (ZukeException.MissingTimeException e) {
             errors += "\n-to";
         }
 
-        return errors;
-    }
 
+
+    }
 
 }

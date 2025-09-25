@@ -39,4 +39,8 @@ public class ZukeException {
         }
     }
 
+    public static class MissingTimeException extends Exception {
+
+    }
+
 }

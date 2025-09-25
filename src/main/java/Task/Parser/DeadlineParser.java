@@ -1,8 +1,36 @@
 package Task.Parser;
 
+import Exception.ZukeException;
+
+
+
 public class DeadlineParser {
-    public static String[] argumentParser(String argument){
-        String[] parsedArgument = new String[2];
+
+    private String description;
+    DateTimeParser by;
+    private String errors = "";
+
+    public String getErrors() {
+        return errors;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+    
+    public DateTimeParser getBy() {
+        return by;
+    }
+
+    public DeadlineParser(String argument) throws ZukeException.MissingArgumentException {
+        argumentParser(argument);
+        if(!errors.isEmpty()) {
+            throw new ZukeException.MissingArgumentException(errors);
+        }
+
+    }
+
+    public void argumentParser(String argument){
         String[] words = argument.split("\\s+");
         StringBuilder descriptionBuilder = new StringBuilder();
         StringBuilder dateBuilder = new StringBuilder();
@@ -23,21 +51,25 @@ public class DeadlineParser {
             }
         }
 
-
-        parsedArgument[0] = descriptionBuilder.toString().trim();
-        parsedArgument[1] = dateBuilder.toString().trim();
-        return parsedArgument;
-    }
-
-    public static String checkArgumentFormat(String description, String by) {
-        String errors = "";
+        description = descriptionBuilder.toString().trim();
         if (description.isEmpty()) {
             errors += "\n-description";
         }
-        if (by.isEmpty()) {
+
+        try {
+            by = new DateTimeParser(dateBuilder.toString().trim());
+
+        } catch (ZukeException.MissingTimeException e) {
             errors += "\n-by";
         }
-
-        return errors;
     }
+
+
+
+
 }
+
+
+
+
+

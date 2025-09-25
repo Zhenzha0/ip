@@ -1,23 +1,31 @@
 package Task;
 
+import Task.Parser.DateTimeParser;
+import Task.Parser.DeadlineParser;
+
 public class Deadline extends Task {
 
-    private String deadline;
+    private DateTimeParser deadline;
 
-    public Deadline(String description, String deadline) {
+    public Deadline(String description, DateTimeParser deadline) {
         super(description);
         setDeadline(deadline);
     }
 
-    public String getDeadline() {
+    public Deadline(DeadlineParser parsedDeadline) {
+        super(parsedDeadline.getDescription());
+        setDeadline(parsedDeadline.getBy());
+    }
+
+    public DateTimeParser getDeadline() {
         return deadline;
     }
 
-    public String getDate() {
+    public DateTimeParser getDate() {
         return deadline;
     }
 
-    public void setDeadline(String deadline) {
+    public void setDeadline(DateTimeParser deadline) {
         this.deadline = deadline;
     }
 
@@ -28,6 +36,10 @@ public class Deadline extends Task {
 
     public String toString() {
         return marker() + " " + description + " (" + "by: " + deadline + ")" ;
+    }
+
+    public String toMemoryBy() {
+        return deadline.toMemoryDateTime();
     }
 
 }

@@ -1,5 +1,8 @@
 package Task;
 
+import Task.Parser.DeadlineParser;
+import Task.Parser.EventParser;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,13 +13,15 @@ public class TaskList {
         tasks.add(new Todo(description));
     }
 
-    public void addDeadline(String description, String deadline) {
-        tasks.add(new Deadline(description, deadline));
+    public void addDeadline(DeadlineParser parsedDeadline) {
+        tasks.add(new Deadline(parsedDeadline));
     }
 
-    public void addEvent(String description, String from, String to) {
-        tasks.add(new Event(description, from, to));
+    public void addEvent(EventParser parsedEvent) {
+        tasks.add(new Event(parsedEvent));
     }
+
+
 
     public int size() { return tasks.size(); }
     public boolean isEmpty() { return tasks.isEmpty(); }

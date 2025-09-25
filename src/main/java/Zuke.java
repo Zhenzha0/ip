@@ -26,6 +26,8 @@ public class Zuke {
 
         } catch (FileNotFoundException e) {
             Ui.showNoStorageFile();
+        } catch (ZukeException.MissingTimeException e) {
+            System.out.println("Memory corrupted");
         }
     }
 

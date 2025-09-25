@@ -6,12 +6,13 @@ import Task.TaskList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 import Task.Todo;
 import Task.Deadline;
 import Task.Event;
 import java.io.FileWriter;
+import java.util.Scanner;
 
+import Exception.ZukeException;
 
 public class Storage {
 
@@ -26,7 +27,7 @@ public class Storage {
 
     }
 
-    public void load(TaskList tasks) throws FileNotFoundException {
+    public void load(TaskList tasks) throws FileNotFoundException, ZukeException.MissingTimeException {
         Ui.showLoadingData();
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f);
@@ -86,9 +87,9 @@ public class Storage {
         if (task instanceof Todo) {
             formatedString += " | " + task.getDescription();
         } else if (task instanceof Deadline) {
-            formatedString += " | "  + task.getDescription() + " | " + ((Deadline) task).getDeadline();
+            formatedString += " | "  + task.getDescription() + " | " + ((Deadline) task).toMemoryBy();
         } else if (task instanceof Event) {
-            formatedString += " | "  + task.getDescription() + " | " + ((Event) task).getFrom() + " | " + ((Event) task).getTo();
+            formatedString += " | "  + task.getDescription() + " | " + ((Event) task).toMemoryFrom() + " | " + ((Event) task).toMemoryTo();
         }
 
         return formatedString;

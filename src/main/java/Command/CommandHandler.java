@@ -98,14 +98,9 @@ public class CommandHandler {
                         throw new ZukeException.MissingDescriptionException();
                     }
 
-                    String[] arguments = DeadlineParser.argumentParser(c.arg);
-                    String argumentErrors = DeadlineParser.checkArgumentFormat(arguments[0], arguments[1]);
+                    DeadlineParser parsedDeadline = new DeadlineParser(c.arg);
 
-                    if(!argumentErrors.isEmpty()) {
-                        throw new ZukeException.MissingArgumentException("The following parts are empty:" + argumentErrors + "\nplease enter an event with valid format.");
-                    }
-
-                    tasks.addDeadline(arguments[0], arguments[1]);
+                    tasks.addDeadline(parsedDeadline);
                     Ui.showAdded(tasks);
                     break;
                 }
@@ -115,13 +110,9 @@ public class CommandHandler {
                         throw new ZukeException.MissingDescriptionException();
                     }
 
-                    String[] arguments = EventParser.argumentParser(c.arg);
-                    String argumentErrors = EventParser.checkArgumentFormat(arguments[0], arguments[1], arguments[2]);
-                    if(!argumentErrors.isEmpty()) {
-                        throw new ZukeException.MissingArgumentException(argumentErrors);
-                    }
+                    EventParser parsedEvent = new EventParser(c.arg);
 
-                    tasks.addEvent(arguments[0], arguments[1], arguments[2]);
+                    tasks.addEvent(parsedEvent);
                     Ui.showAdded(tasks);
                     break;
                 }
