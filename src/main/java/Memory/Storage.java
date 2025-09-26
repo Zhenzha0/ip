@@ -76,6 +76,11 @@ public class Storage {
 
             File file = new File(filePath);
 
+            File parentDir = file.getParentFile();
+            if (parentDir != null && !parentDir.exists()) {
+                parentDir.mkdirs();
+            }
+
             if (file.exists()) {
                 file.delete(); // deletes the physical file
             }
