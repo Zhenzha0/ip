@@ -1,6 +1,7 @@
-Here's the complete User Guide ready to copy and paste into your README.md:
+theme: jekyll-theme-cayman
+title: Zuke Task Manager
+description: A simple and fast command-line task management application
 
-```markdown
 # Zuke User Guide
 
 Zuke is a **fast, simple command-line task manager** for organizing your todos, deadlines, and events. It helps you keep track of what needs to be done through an easy-to-use text interface.
@@ -274,6 +275,5 @@ A: Currently, you need to delete the task and add it again with the correct info
 | **Find by keyword** | `find KEYWORD` | `find book` |
 | **Find by date** | `date DATE` | `date 2025-10-15` |
 | **Exit** | `bye` | `bye` |
-```
 
-Just copy everything above (including the triple backticks at the start and end) and paste it into your README.md file!
+---
