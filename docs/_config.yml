@@ -1,5 +1,5 @@
 title: Zuke
-description: Testing GitHub Pages theme
+description: Fast, lightweight CLI tool for managing tasks and staying productive.
 theme: jekyll-theme-time-machine
 markdown: kramdown
 kramdown:
