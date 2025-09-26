@@ -24,7 +24,7 @@ Zuke is a **fast, simple command-line task manager** for organizing your todos, 
    java -jar Zuke.jar
    ```
 5. If everything goes right, you should see the following on your CLI:
-   ```bash
+   ```text
    $$$$$$$$\ $$\   $$\ $$\   $$\ $$$$$$$$\ 
     \____$$  |$$ |  $$ |$$ | $$  |$$  ____|
         $$  / $$ |  $$ |$$ |$$  / $$ |      
@@ -44,14 +44,14 @@ Zuke is a **fast, simple command-line task manager** for organizing your todos, 
    ```
 6. Enter commands to start managing your takks
 
-```
-____________________________________________________________
-Hello! I'm Zuke
-What can I do for you?
-____________________________________________________________
-Loading data...
-No previous data available, start adding your task now
-   ```
+  ```
+  ____________________________________________________________
+  Hello! I'm Zuke
+  What can I do for you?
+  ____________________________________________________________
+  Loading data...
+  No previous data available, start adding your task now
+  ```
 6. Type commands and press Enter to execute them.
 
 ## Features
