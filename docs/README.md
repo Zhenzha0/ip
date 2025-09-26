@@ -49,14 +49,14 @@ Zuke is a **fast, simple command-line task manager** for organizing your todos, 
    ```
 6. Type commands and press Enter to execute them.
 
-  ```bash
-  ____________________________________________________________
-  Hello! I'm Zuke
-  What can I do for you?
-  ____________________________________________________________
-  Loading data...
-  No previous data available, start adding your task now
-  ```
+    ```text
+    ____________________________________________________________
+    Hello! I'm Zuke
+    What can I do for you?
+    ____________________________________________________________
+    Loading data...
+    No previous data available, start adding your task now
+    ```
 
 
 ## Features
