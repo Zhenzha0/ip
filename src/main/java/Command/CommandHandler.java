@@ -160,6 +160,10 @@ public class CommandHandler {
                 }
 
                 case FIND: {
+                    if(c.arg == null) {
+                        throw new ZukeException.MissingDescriptionException();
+                    }
+
                     if (tasks.isEmpty()) {
                         throw new ZukeException.EmptyListException();
                     }
@@ -170,6 +174,10 @@ public class CommandHandler {
                 }
 
                 case FIND_DATE: {
+                    if(c.arg == null) {
+                        throw new ZukeException.MissingDescriptionException();
+                    }
+
                     if (tasks.isEmpty()) {
                         throw new ZukeException.EmptyListException();
                     }

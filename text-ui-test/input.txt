@@ -1,19 +1,42 @@
 todo borrow book
-event read book /from 7pm /to 9pm
-deadline return book /by Sunday
+deadline return book /by 2025-10-15
+event meeting /from 2025-10-20 0900 /to 2025-10-20 1100
 list
 mark 1
 mark 2
-list
 unmark 1
 list
-oiii
+delete 3
+list
+find book
+date 2025-10-15
 todo
-event
 deadline
-event hello
-event /from 10pm
+event
+todo
+deadline
+event
 deadline return book
-deadline /by
-deadline /by 10pm
+deadline /by 2025-10-15
+event meeting /from 2025-10-20
+event /from 2025-10-20 /to 2025-10-21
+mark
+unmark
+delete
+mark 5
+mark 0
+mark -1
+unmark 10
+delete 99
+mark abc
+unmark xyz
+delete notanumber
+find
+date
+date invalid-date
+date 2025-13-45
+blahblah
+qwerty random command
+list
+mark 1
 bye
