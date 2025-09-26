@@ -44,7 +44,7 @@ Zuke is a **fast, simple command-line task manager** for organizing your todos, 
    ```
 6. Enter commands to start managing your takks
 
-
+```
 ____________________________________________________________
 Hello! I'm Zuke
 What can I do for you?
