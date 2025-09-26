@@ -9,26 +9,54 @@ import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import Exception.ZukeException;
 
+/**
+ * Parses date and time strings into LocalDateTime objects.
+ * Supports multiple date formats: yyyy-MM-dd and d/M/yyyy.
+ * Supports time formats: HHmm and HH:mm.
+ */
 public class DateTimeParser {
     private LocalDateTime parsedDateTime;
     private String MemoryDateTime;
 
-    //for date searcher
+    /**
+     * Gets the date portion of the parsed date/time.
+     *
+     * @return The LocalDate extracted from the parsed date/time.
+     */
     public LocalDate getParsedDate() {
         return parsedDateTime.toLocalDate();
     }
 
+    /**
+     * Gets the complete parsed date and time.
+     *
+     * @return The parsed LocalDateTime object.
+     */
     public LocalDateTime getParsedDateTime() {
         return parsedDateTime;
     }
 
+    /**
+     * Creates a DateTimeParser and parses the given date/time string.
+     *
+     * @param dateTime The date/time string to parse.
+     * @throws ZukeException.MissingTimeException If the date/time string is empty.
+     */
     public DateTimeParser(String dateTime) throws ZukeException.MissingTimeException {
         parsedDateTime = ParseDateTime(dateTime);
         MemoryDateTime = dateTime;
     }
 
-
-
+    /**
+     * Parses a date/time string into a LocalDateTime object.
+     * Accepts formats: yyyy-MM-dd [HHmm|HH:mm] or d/M/yyyy [HHmm|HH:mm].
+     * If no time is provided, defaults to 23:59.
+     *
+     * @param dateTime The date/time string to parse.
+     * @return The parsed LocalDateTime.
+     * @throws IllegalArgumentException If the date/time format is invalid.
+     * @throws ZukeException.MissingTimeException If the date/time string is empty.
+     */
     public LocalDateTime ParseDateTime(String dateTime) throws IllegalArgumentException, ZukeException.MissingTimeException {
         String s = dateTime.trim();
 
@@ -76,10 +104,20 @@ public class DateTimeParser {
         return LocalDateTime.of(date, time);
     }
 
+    /**
+     * Returns a formatted string representation of the date/time.
+     *
+     * @return The date/time formatted as "MMM dd yyyy, h:mma".
+     */
     public String toString() {
         return parsedDateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma"));
     }
 
+    /**
+     * Returns the original date/time string for storage purposes.
+     *
+     * @return The original date/time string.
+     */
     public String toMemoryDateTime() {
         return MemoryDateTime;
     }
