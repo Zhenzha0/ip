@@ -45,6 +45,7 @@ public class Ui {
 
     public static void showList(TaskList tasks) {
         line();
+        System.out.println("Here are the tasks in your list:");
         System.out.print(tasks.render());
         line();
     }

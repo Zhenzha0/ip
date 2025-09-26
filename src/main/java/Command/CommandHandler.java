@@ -142,6 +142,7 @@ public class CommandHandler {
 
                     DescriptionSearcher matchingTasks = new DescriptionSearcher(tasks, c.arg);
                     Ui.showFind(matchingTasks.getMatchingTasks());
+                    break;
                 }
 
                 case FIND_DATE: {
@@ -153,6 +154,7 @@ public class CommandHandler {
 
                     DateSearcher matchingTasks = new DateSearcher(tasks, finder.getParsedDate());
                     Ui.showFind(matchingTasks.getMatchingTasks());
+                    break;
 
                 }
 
@@ -160,7 +162,7 @@ public class CommandHandler {
                     throw new ZukeException.UnknowInputException();
                 }
 
-            } catch (ZukeException.UnknowInputException | ZukeException.MissingArgumentException | ZukeException.EmptyListException | ZukeException.MissingDescriptionException | ZukeException.MissingTimeException |IOException e) {
+            } catch (ZukeException.UnknowInputException | ZukeException.MissingArgumentException | ZukeException.EmptyListException | ZukeException.MissingDescriptionException | ZukeException.MissingTimeException | IOException | IllegalArgumentException e) {
                 Ui.error(e.getMessage());
             }
 
