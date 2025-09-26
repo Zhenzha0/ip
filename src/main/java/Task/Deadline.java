@@ -21,9 +21,6 @@ public class Deadline extends Task {
         return deadline;
     }
 
-    public DateTimeParser getDate() {
-        return deadline;
-    }
 
     public void setDeadline(DateTimeParser deadline) {
         this.deadline = deadline;

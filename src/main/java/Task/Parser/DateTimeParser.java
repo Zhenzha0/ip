@@ -13,6 +13,11 @@ public class DateTimeParser {
     private LocalDateTime parsedDateTime;
     private String MemoryDateTime;
 
+    //for date searcher
+    public LocalDate getParsedDate() {
+        return parsedDateTime.toLocalDate();
+    }
+
     public LocalDateTime getParsedDateTime() {
         return parsedDateTime;
     }
