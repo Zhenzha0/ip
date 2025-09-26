@@ -1,6 +1,11 @@
-theme: jekyll-theme-cayman
-title: Zuke Task Manager
-description: A simple and fast command-line task management application
+"$$$$$$$$\\ $$\\   $$\\ $$\\   $$\\ $$$$$$$$\\ \n" +
+                "\\____$$  |$$ |  $$ |$$ | $$  |$$  _____|\n" +
+                "    $$  / $$ |  $$ |$$ |$$  / $$ |      \n" +
+                "   $$  /  $$ |  $$ |$$$$$  /  $$$$$\\    \n" +
+                "  $$  /   $$ |  $$ |$$  $$<   $$  __|   \n" +
+                " $$  /    $$ |  $$ |$$ |\\$$\\  $$ |      \n" +
+                "$$$$$$$$\\ \\$$$$$$  |$$ | \\$$\\ $$$$$$$$\\ \n" +
+                "\\________| \\______/ \\__|  \\__|\\________|\n"
 
 # Zuke User Guide
 
