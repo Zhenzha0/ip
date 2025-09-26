@@ -26,7 +26,7 @@ Zuke is a **fast, simple command-line task manager** for organizing your todos, 
 5. If everything goes right, you should see the following on your CLI:
    ```bash
    $$$$$$$$\ $$\   $$\ $$\   $$\ $$$$$$$$\ 
-    \____$$  |$$ |  $$ |$$ | $$  |$$  _____|
+    \____$$  |$$ |  $$ |$$ | $$  |$$  ____|
         $$  / $$ |  $$ |$$ |$$  / $$ |      
        $$  /  $$ |  $$ |$$$$$  /  $$$$$\    
       $$  /   $$ |  $$ |$$  $$<   $$  __|   
