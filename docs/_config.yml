@@ -1,3 +1,6 @@
 title: Zuke
 description: Testing GitHub Pages theme
 theme: jekyll-theme-time-machine
+markdown: kramdown
+kramdown:
+  toc_levels: 2..4 
