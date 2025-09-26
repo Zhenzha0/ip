@@ -40,6 +40,7 @@ public class ZukeException {
     }
 
     public static class MissingTimeException extends Exception {
+        public MissingTimeException() { super("No time is provided."); }
 
     }
 

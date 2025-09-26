@@ -45,6 +45,7 @@ public class Ui {
 
     public static void showList(TaskList tasks) {
         line();
+        System.out.println("Here are the tasks in your list:");
         System.out.print(tasks.render());
         line();
     }
@@ -62,6 +63,17 @@ public class Ui {
         System.out.println("Got it. I've deleted this task: ");
         System.out.println(deletedTasks);
         showCurrentTaskSize(tasks);
+        line();
+    }
+
+    public static void showFind(TaskList tasks) {
+        line();
+        if(tasks.isEmpty()) {
+            System.out.println("No related tasks found");
+        } else {
+            System.out.println("Here are the matching tasks in your list: ");
+            System.out.println(tasks.render());
+        }
         line();
     }
 

@@ -60,7 +60,7 @@ public class Storage {
                 return;
             }
             for(Task task : tasks.getTasks()) {
-                fw.write(saveFormat(task) + System.lineSeparator());
+                fw.write(formatTask(task) + System.lineSeparator());
             }
 
             fw.close();
@@ -71,7 +71,7 @@ public class Storage {
         }
     }
 
-    public static String saveFormat(Task task){
+    public static String formatTask(Task task){
         String formatedString = "";
         if (task instanceof Todo) {
             formatedString = "T | ";

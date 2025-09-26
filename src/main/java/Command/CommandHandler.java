@@ -2,12 +2,15 @@ package Command;
 
 import Command.CommandParser;
 import Memory.Storage;
+import Task.Parser.DateTimeParser;
 import Task.Parser.DeadlineParser;
 import Task.Parser.EventParser;
 import Task.Task;
 import Task.TaskList;
 import App.Ui;
 import Exception.ZukeException;
+import Searchers.DateSearcher;
+import Searchers.DescriptionSearcher;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -132,11 +135,34 @@ public class CommandHandler {
                     break;
                 }
 
+                case FIND: {
+                    if (tasks.isEmpty()) {
+                        throw new ZukeException.EmptyListException();
+                    }
+
+                    DescriptionSearcher matchingTasks = new DescriptionSearcher(tasks, c.arg);
+                    Ui.showFind(matchingTasks.getMatchingTasks());
+                    break;
+                }
+
+                case FIND_DATE: {
+                    if (tasks.isEmpty()) {
+                        throw new ZukeException.EmptyListException();
+                    }
+
+                    DateTimeParser finder = new DateTimeParser(c.arg);
+
+                    DateSearcher matchingTasks = new DateSearcher(tasks, finder.getParsedDate());
+                    Ui.showFind(matchingTasks.getMatchingTasks());
+                    break;
+
+                }
+
                 case UNKNOWN:
                     throw new ZukeException.UnknowInputException();
                 }
 
-            } catch (ZukeException.UnknowInputException | ZukeException.MissingArgumentException | ZukeException.EmptyListException | ZukeException.MissingDescriptionException | IOException e) {
+            } catch (ZukeException.UnknowInputException | ZukeException.MissingArgumentException | ZukeException.EmptyListException | ZukeException.MissingDescriptionException | ZukeException.MissingTimeException | IOException | IllegalArgumentException e) {
                 Ui.error(e.getMessage());
             }
 

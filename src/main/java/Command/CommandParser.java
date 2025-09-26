@@ -6,7 +6,7 @@ import App.Ui;
 
 public class CommandParser {
 
-    public enum Type { LIST, MARK, UNMARK, BYE, TODO, DEADLINE, EVENT, DELETE, UNKNOWN }
+    public enum Type { LIST, MARK, UNMARK, BYE, TODO, DEADLINE, EVENT, DELETE, FIND, FIND_DATE, UNKNOWN }
 
     public static class Command {
         public final Type type;
@@ -32,6 +32,8 @@ public class CommandParser {
         case "event": return new Command(Type.EVENT, rest);
         case "deadline": return new Command(Type.DEADLINE, rest);
         case "delete": return new Command(Type.DELETE, rest);
+        case "find":    return new Command(Type.FIND, rest);
+        case "date": return new Command(Type.FIND_DATE, rest);
         default:       return new Command(Type.UNKNOWN, line); // treat as add
         }
     }
