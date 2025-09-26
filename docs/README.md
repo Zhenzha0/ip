@@ -47,9 +47,9 @@ Zuke is a **fast, simple command-line task manager** for organizing your todos, 
     No previous data available, start adding your task now
 
    ```
-6. Enter commands to start managing your takks
+6. Type commands and press Enter to execute them.
 
-  ```
+  ```bash
   ____________________________________________________________
   Hello! I'm Zuke
   What can I do for you?
@@ -57,7 +57,7 @@ Zuke is a **fast, simple command-line task manager** for organizing your todos, 
   Loading data...
   No previous data available, start adding your task now
   ```
-6. Type commands and press Enter to execute them.
+
 
 ## Features
 
