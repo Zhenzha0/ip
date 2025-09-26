@@ -3,11 +3,20 @@ package Command;
 import Exception.ZukeException;
 import App.Ui;
 
-
+/**
+ * Parses user input into executable commands.
+ * This class handles the conversion of text input into structured Command objects.
+ */
 public class CommandParser {
 
+    /**
+     * Enumeration of all possible command types in the application.
+     */
     public enum Type { LIST, MARK, UNMARK, BYE, TODO, DEADLINE, EVENT, DELETE, FIND, FIND_DATE, UNKNOWN }
 
+    /**
+     * Represents a parsed command with its type and arguments.
+     */
     public static class Command {
         public final Type type;
         public final String arg;   // for ADD or index text for MARK/UNMARK
@@ -18,6 +27,13 @@ public class CommandParser {
         }
     }
 
+    /**
+     * Parses a user input line into a Command object.
+     * Identifies the command type from the first word and extracts any arguments.
+     *
+     * @param line The user input string to parse.
+     * @return A Command object representing the parsed input.
+     */
     public static Command parse(String line) {
         String[] parts = line.trim().split("\\s+", 2);
         String cmd = parts[0].toLowerCase();
@@ -38,7 +54,14 @@ public class CommandParser {
         }
     }
 
-    /** returns zero-based index or null (and prints error via Ui) */
+    /**
+     * Parses an index from a string and validates it against the maximum allowed value.
+     * Returns null and displays an error message if parsing fails or index is out of range.
+     *
+     * @param text The string to parse as an index.
+     * @param max The maximum allowed index value.
+     * @return The zero-based index if valid, null otherwise.
+     */
     public static Integer parseIndexOrNull(String text, int max) {
 
         try {

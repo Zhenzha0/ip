@@ -14,19 +14,41 @@ import java.util.Scanner;
 
 import Exception.ZukeException;
 
+/**
+ * Handles loading and saving of task data to persistent storage.
+ * Manages file operations for task persistence across application sessions.
+ */
 public class Storage {
 
     private String filePath;
 
+    /**
+     * Sets the file path for storage operations.
+     *
+     * @param filePath The path to the storage file.
+     */
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Creates a new Storage instance with the specified file path.
+     *
+     * @param filePath The path to the storage file.
+     */
     public Storage(String filePath) {
         setFilePath(filePath);
 
     }
 
+    /**
+     * Loads tasks from the storage file into the provided TaskList.
+     * Displays loading progress messages to the user.
+     *
+     * @param tasks The TaskList to populate with loaded tasks.
+     * @throws FileNotFoundException If the storage file does not exist.
+     * @throws ZukeException.MissingTimeException If time data in the file is invalid.
+     */
     public void load(TaskList tasks) throws FileNotFoundException, ZukeException.MissingTimeException {
         Ui.showLoadingData();
         File f = new File(filePath); // create a File for the given file path
@@ -42,6 +64,13 @@ public class Storage {
         Ui.showDoneLoadingData();
     }
 
+    /**
+     * Saves all tasks from the TaskList to the storage file.
+     * Overwrites the existing file with the current task data.
+     *
+     * @param tasks The TaskList containing tasks to save.
+     * @throws IOException If an error occurs during file writing.
+     */
     public void save(TaskList tasks) throws IOException {
         try{
 
@@ -70,6 +99,14 @@ public class Storage {
 
         }
     }
+
+    /**
+     * Formats a Task object into a string suitable for storage.
+     * The format varies based on task type (Todo, Deadline, or Event).
+     *
+     * @param task The Task to format.
+     * @return A formatted string representation of the task for storage.
+     */
 
     public static String formatTask(Task task){
         String formatedString = "";

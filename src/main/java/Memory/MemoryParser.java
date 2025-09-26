@@ -8,8 +8,19 @@ import Task.Event;
 import Task.Todo;
 import Exception.ZukeException;
 
+/**
+ * Parses stored task data from file format back into Task objects.
+ */
 public class MemoryParser {
 
+    /**
+     * Parses a single line from the storage file into a Task object.
+     * The line format is: TaskType | isDone | description | [dates...]
+     *
+     * @param line The line from the storage file to parse.
+     * @return The Task object created from the parsed line.
+     * @throws ZukeException.MissingTimeException If the time information is invalid or missing.
+     */
     public static Task parseline(String line) throws ZukeException.MissingTimeException {
         String[] parts = line.split("\\|");
         for (int i = 0; i < parts.length; i++) {

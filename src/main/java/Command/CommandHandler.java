@@ -16,24 +16,48 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-
+/**
+ * Handles the processing and execution of user commands.
+ * This class manages the main command loop and delegates command execution.
+ */
 public class CommandHandler {
     private Storage storage;
     private TaskList tasks;
 
+    /**
+     * Sets the storage instance for the command handler.
+     *
+     * @param storage The Storage instance to use for saving/loading tasks.
+     */
     public void setStorage(Storage storage) {
         this.storage = storage;
     }
 
+    /**
+     * Sets the task list for the command handler.
+     *
+     * @param tasks The TaskList to operate on.
+     */
     public void setTasks(TaskList tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Creates a new CommandHandler with the specified task list and storage.
+     *
+     * @param tasks The TaskList to manage.
+     * @param storage The Storage instance for persistence.
+     */
     public CommandHandler(TaskList tasks, Storage storage){
         setStorage(storage);
         setTasks(tasks);
     }
 
+    /**
+     * Handles the main command processing loop.
+     * Continuously reads user input, parses commands, and executes the appropriate actions.
+     * The loop terminates when the user enters the "bye" command.
+     */
     public void handleCommands() {
         Scanner in = new Scanner(System.in);
 
