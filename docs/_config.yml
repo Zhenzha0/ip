@@ -1,4 +1,5 @@
 title: ZUKE
+logo: /Zuke_Logo_Dark
 description: Fast, lightweight CLI tool for managing tasks and staying productive.
 theme: jekyll-theme-time-machine
 markdown: kramdown
