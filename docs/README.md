@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="Zuke_Logo_Light.svg" alt="ZUKE Logo" width="500"/>
+  <img src="Zuke_Logo_Dark.svg" alt="ZUKE Logo" width="1000"/>
 </p>
 
 <div align="center">
