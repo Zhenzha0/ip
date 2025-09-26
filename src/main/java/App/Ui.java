@@ -65,6 +65,17 @@ public class Ui {
         line();
     }
 
+    public static void showFind(TaskList tasks) {
+        line();
+        if(tasks.isEmpty()) {
+            System.out.println("No related tasks found");
+        } else {
+            System.out.println("Here are the matching tasks in your list: ");
+            System.out.println(tasks.render());
+        }
+        line();
+    }
+
     public static void showMarked(Task t, boolean nowDone) {
         line();
         System.out.println(nowDone
