@@ -34,7 +34,7 @@ Zuke is a **fast, simple command-line task manager** for organizing your todos, 
     \________| \______/ \__|  \__|\________|
     
     ____________________________________________________________
-    Hello! I'm Zuke, a fast minimal CLI task manager
+    Hello! I'm Zuke, a fast, minimal CLI task manager
     ____________________________________________________________
     ____________________________________________________________
     Quick Guide:
