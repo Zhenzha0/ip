@@ -310,6 +310,7 @@ A: Currently, you need to delete the task and add it again with the correct info
 | **Delete** | `delete INDEX` | `delete 3` |
 | **Find by keyword** | `find KEYWORD` | `find book` |
 | **Find by date** | `date DATE` | `date 2025-10-15` |
+| **Guide** | `guide` | `shows list of commands and format` |
 | **Exit** | `bye` | `bye` |
 
 ---
