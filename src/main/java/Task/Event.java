@@ -1,7 +1,7 @@
-package Task;
+package task;
 
-import Task.Parser.EventParser;
-import Task.Parser.DateTimeParser;
+import task.parser.EventParser;
+import task.parser.DateTimeParser;
 
 /**
  * Represents an event task with a start and end time.
@@ -79,7 +79,7 @@ public class Event extends Task {
      */
     public String marker(){
         String type = "[E]";
-        return done ? type + "[X]" : type + "[ ]";
+        return isDone ? type + "[X]" : type + "[ ]";
     }
 
     /**

@@ -1,18 +1,18 @@
-package Memory;
+package storage;
 
-import App.Ui;
-import Task.Task;
-import Task.TaskList;
+import ui.Ui;
+import task.Task;
+import task.TaskList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import Task.Todo;
-import Task.Deadline;
-import Task.Event;
+import task.Todo;
+import task.Deadline;
+import task.Event;
 import java.io.FileWriter;
 import java.util.Scanner;
 
-import Exception.ZukeException;
+import exception.ZukeException;
 
 /**
  * Handles loading and saving of task data to persistent storage.
@@ -59,7 +59,7 @@ public class Storage {
         }
         while(s.hasNextLine()){
             String line = s.nextLine();
-            tasks.getTasks().add(MemoryParser.parseline(line));
+            tasks.getTasks().add(StorageParser.parseLine(line));
         }
         Ui.showDoneLoadingData();
     }

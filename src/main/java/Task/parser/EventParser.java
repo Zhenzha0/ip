@@ -1,6 +1,6 @@
-package Task.Parser;
+package task.parser;
 
-import Exception.ZukeException;
+import exception.ZukeException;
 
 /**
  * Parses event command arguments into structured components.
@@ -55,7 +55,7 @@ public class EventParser {
      * @throws ZukeException.MissingArgumentException If required parts are missing.
      */
     public EventParser(String argument) throws ZukeException.MissingArgumentException {
-        argumentParser(argument);
+        parseArgument(argument);
         if(!errors.isEmpty()) {
             throw new ZukeException.MissingArgumentException(errors);
         }
@@ -68,7 +68,7 @@ public class EventParser {
      *
      * @param argument The argument string to parse.
      */
-    public void argumentParser(String argument){
+    public void parseArgument(String argument){
         String[] words = argument.split("\\s+");
         StringBuilder descriptionBuilder = new StringBuilder();
         StringBuilder fromBuilder = new StringBuilder();

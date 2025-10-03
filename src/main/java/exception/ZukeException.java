@@ -1,4 +1,4 @@
-package Exception;
+package exception;
 
 /**
  * Container class for all custom exceptions used in the Zuke application.
@@ -8,8 +8,8 @@ public class ZukeException {
     /**
      * Exception thrown when an unknown or invalid command is entered.
      */
-    public static class UnknowInputException extends Exception {
-        public UnknowInputException() {
+    public static class UnknownInputException extends Exception {
+        public UnknownInputException() {
             super("Unknown command, please follow format");
         }
     }

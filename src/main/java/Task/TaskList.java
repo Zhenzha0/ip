@@ -1,7 +1,7 @@
-package Task;
+package task;
 
-import Task.Parser.DeadlineParser;
-import Task.Parser.EventParser;
+import task.parser.DeadlineParser;
+import task.parser.EventParser;
 
 import java.util.ArrayList;
 import java.util.List;

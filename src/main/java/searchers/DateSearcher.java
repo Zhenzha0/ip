@@ -1,9 +1,9 @@
-package Searchers;
+package searchers;
 
-import Task.Task;
-import Task.TaskList;
-import Task.Event;
-import Task.Deadline;
+import task.Task;
+import task.TaskList;
+import task.Event;
+import task.Deadline;
 
 import java.time.LocalDate;
 
@@ -46,13 +46,13 @@ public class DateSearcher {
         for(Task task : tasks.getTasks()){
             if(task instanceof Deadline deadline){
                 LocalDate by = deadline.getDeadline().getParsedDate();
-                DeadlineComparator(deadline, by);
+                checkDeadlineMatch(deadline, by);
             }
 
             if(task instanceof Event event){
                 LocalDate from = event.getFrom().getParsedDate();
                 LocalDate to = event.getTo().getParsedDate();
-                EventComparator(event, from, to);
+                checkEventMatch(event, from, to);
 
             }
 
@@ -66,7 +66,7 @@ public class DateSearcher {
      * @param deadline The Deadline task to check.
      * @param by The deadline date of the task.
      */
-    public void DeadlineComparator(Deadline deadline, LocalDate by){
+    public void checkDeadlineMatch(Deadline deadline, LocalDate by){
         if(by.isEqual(searchDate)) {
             matchingTasks.getTasks().add(deadline);
         }
@@ -80,7 +80,7 @@ public class DateSearcher {
      * @param from The start date of the event.
      * @param to The end date of the event.
      */
-    public void EventComparator(Event event, LocalDate from, LocalDate to){
+    public void checkEventMatch(Event event, LocalDate from, LocalDate to){
         if(from.isBefore(searchDate) && to.isAfter(searchDate)) {
             matchingTasks.getTasks().add(event);
         }

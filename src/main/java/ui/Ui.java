@@ -1,7 +1,7 @@
-package App;
+package ui;
 
-import Task.Task;
-import Task.TaskList;
+import task.Task;
+import task.TaskList;
 
 /**
  * Handles all user interface interactions for the Zuke application.
@@ -32,11 +32,33 @@ public class Ui {
     }
 
     /**
+     * Displays a quick start guide showing available commands.
+     */
+    public static void showQuickGuide() {
+        line();
+        System.out.println("Quick Guide:");
+        System.out.println("  todo <description>           - Add a todo task");
+        System.out.println("  deadline <desc> /by <date>   - Add a deadline");
+        System.out.println("  event <desc> /from <date> /to <date> - Add an event");
+        System.out.println("  list                         - View all tasks");
+        System.out.println("  mark <index>                 - Mark task as done");
+        System.out.println("  unmark <index>               - Mark task as not done");
+        System.out.println("  delete <index>               - Delete a task");
+        System.out.println("  find <keyword>               - Search tasks by keyword");
+        System.out.println("  date <date>                  - Find tasks on a date");
+        System.out.println("  guide                          - View command guide");
+        System.out.println("  bye                          - Exit the app");
+        System.out.println();
+        System.out.println("Date formats: yyyy-MM-dd or d/M/yyyy (optional time: HHmm or HH:mm)");
+        line();
+    }
+
+    /**
      * Displays a welcome greeting message to the user.
      */
     public static void hello() {
         line();
-        System.out.println("Hello! I'm Zuke\nWhat can I do for you?");
+        System.out.println("Hello! I'm Zuke, a fast minimal CLI task manager");
         line();
     }
 
@@ -46,6 +68,7 @@ public class Ui {
     public static void welcome() {
         logo();
         hello();
+        showQuickGuide();
     }
 
     /**
@@ -156,6 +179,7 @@ public class Ui {
      */
     public static void showNoStorageFile() {
         System.out.println("No previous data available, start adding your task now");
+        line();
     }
 
     /**

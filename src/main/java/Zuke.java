@@ -1,16 +1,10 @@
-import Command.CommandHandler;
-import Command.CommandParser;
-import Memory.Storage;
-import Task.Parser.DeadlineParser;
-import Task.Parser.EventParser;
-import Task.Task;
-import Task.TaskList;
-import App.Ui;
-import Exception.ZukeException;
+import command.CommandHandler;
+import storage.Storage;
+import task.TaskList;
+import ui.Ui;
+import exception.ZukeException;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Main class for the Zuke task management application.

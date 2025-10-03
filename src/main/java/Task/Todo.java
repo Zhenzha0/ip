@@ -1,4 +1,4 @@
-package Task;
+package task;
 
 /**
  * Represents a simple todo task without any date/time constraints.
@@ -22,7 +22,7 @@ public class Todo extends Task {
      */
     public String marker(){
         String type = "[T]";
-        return done ? type + "[X]" : type + "[ ]";
+        return isDone ? type + "[X]" : type + "[ ]";
     }
 
 }

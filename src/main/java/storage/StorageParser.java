@@ -1,17 +1,16 @@
-package Memory;
+package storage;
 
-import Task.Parser.DateTimeParser;
-import Task.Task;
-import Task.Task;
-import Task.Deadline;
-import Task.Event;
-import Task.Todo;
-import Exception.ZukeException;
+import task.parser.DateTimeParser;
+import task.Task;
+import task.Deadline;
+import task.Event;
+import task.Todo;
+import exception.ZukeException;
 
 /**
  * Parses stored task data from file format back into Task objects.
  */
-public class MemoryParser {
+public class StorageParser {
 
     /**
      * Parses a single line from the storage file into a Task object.
@@ -21,7 +20,7 @@ public class MemoryParser {
      * @return The Task object created from the parsed line.
      * @throws ZukeException.MissingTimeException If the time information is invalid or missing.
      */
-    public static Task parseline(String line) throws ZukeException.MissingTimeException {
+    public static Task parseLine(String line) throws ZukeException.MissingTimeException {
         String[] parts = line.split("\\|");
         for (int i = 0; i < parts.length; i++) {
             parts[i] = parts[i].trim();

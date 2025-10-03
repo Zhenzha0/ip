@@ -1,7 +1,7 @@
-package Task;
+package task;
 
-import Task.Parser.DateTimeParser;
-import Task.Parser.DeadlineParser;
+import task.parser.DateTimeParser;
+import task.parser.DeadlineParser;
 
 /**
  * Represents a task with a deadline.
@@ -58,7 +58,7 @@ public class Deadline extends Task {
      */
     public String marker(){
         String type = "[D]";
-        return done ? type + "[X]" : type + "[ ]";
+        return isDone ? type + "[X]" : type + "[ ]";
     }
 
     /**

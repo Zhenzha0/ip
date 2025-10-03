@@ -1,4 +1,4 @@
-package Task;
+package task;
 
 /**
  * Represents a basic task with a description and completion status.
@@ -6,7 +6,7 @@ package Task;
  */
 public abstract class Task {
     protected String description;
-    protected boolean done;
+    protected boolean isDone;
 
     /**
      * Creates a new Task with the specified description.
@@ -16,7 +16,7 @@ public abstract class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -34,21 +34,21 @@ public abstract class Task {
      * @return True if the task is done, false otherwise.
      */
     public boolean isDone() {
-        return done;
+        return isDone;
     }
 
     /**
      * Marks the task as done.
      */
     public void mark() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
      * Marks the task as not done.
      */
     public void unmark() {
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -56,7 +56,7 @@ public abstract class Task {
      *
      * @return "[X]" if done, "[ ]" if not done.
      */
-    public String marker() { return done ? "[X]" : "[ ]"; }
+    public String marker() { return isDone ? "[X]" : "[ ]"; }
 
     /**
      * Returns a string representation of the task.
@@ -73,7 +73,7 @@ public abstract class Task {
      * @return True if the task is done, false otherwise.
      */
     public boolean getDone() {
-        return done;
+        return isDone;
     }
 
 }

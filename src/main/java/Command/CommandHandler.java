@@ -1,18 +1,16 @@
-package Command;
+package command;
 
-import Command.CommandParser;
-import Memory.Storage;
-import Task.Parser.DateTimeParser;
-import Task.Parser.DeadlineParser;
-import Task.Parser.EventParser;
-import Task.Task;
-import Task.TaskList;
-import App.Ui;
-import Exception.ZukeException;
-import Searchers.DateSearcher;
-import Searchers.DescriptionSearcher;
+import storage.Storage;
+import task.parser.DateTimeParser;
+import task.parser.DeadlineParser;
+import task.parser.EventParser;
+import task.Task;
+import task.TaskList;
+import ui.Ui;
+import exception.ZukeException;
+import searchers.DateSearcher;
+import searchers.DescriptionSearcher;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -59,14 +57,14 @@ public class CommandHandler {
      * The loop terminates when the user enters the "bye" command.
      */
     public void handleCommands() {
-        Scanner in = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            String line = in.nextLine();
-            CommandParser.Command c = CommandParser.parse(line);
+            String line = scanner.nextLine();
+            CommandParser.Command command = CommandParser.parseCommand(line);
 
             try{
-                switch (c.type) {
+                switch (command.type) {
                 case BYE:
                     Ui.bye();
 
@@ -88,7 +86,7 @@ public class CommandHandler {
                         throw new ZukeException.EmptyListException();
                     }
 
-                    Integer idx = CommandParser.parseIndexOrNull(c.arg, tasks.size());
+                    Integer idx = CommandParser.parseIndexOrNull(command.arg, tasks.size());
                     if (idx == null) {
                         break;
                     }
@@ -103,7 +101,7 @@ public class CommandHandler {
                         throw new ZukeException.EmptyListException();
                     }
 
-                    Integer idx = CommandParser.parseIndexOrNull(c.arg, tasks.size());
+                    Integer idx = CommandParser.parseIndexOrNull(command.arg, tasks.size());
                     if (idx == null) break;
                     tasks.unmark(idx);
                     Ui.showMarked(tasks.get(idx), false);
@@ -111,21 +109,21 @@ public class CommandHandler {
                 }
 
                 case TODO: {
-                    if(c.arg == null) {
+                    if(command.arg == null) {
                         throw new ZukeException.MissingDescriptionException();
                     }
 
-                    tasks.addTodo(c.arg);                 // c.arg == original line
+                    tasks.addTodo(command.arg);                 // c.arg == original line
                     Ui.showAdded(tasks);
                     break;
                 }
 
                 case DEADLINE: {
-                    if(c.arg == null) {
+                    if(command.arg == null) {
                         throw new ZukeException.MissingDescriptionException();
                     }
 
-                    DeadlineParser parsedDeadline = new DeadlineParser(c.arg);
+                    DeadlineParser parsedDeadline = new DeadlineParser(command.arg);
 
                     tasks.addDeadline(parsedDeadline);
                     Ui.showAdded(tasks);
@@ -133,11 +131,11 @@ public class CommandHandler {
                 }
 
                 case EVENT: {
-                    if(c.arg == null) {
+                    if(command.arg == null) {
                         throw new ZukeException.MissingDescriptionException();
                     }
 
-                    EventParser parsedEvent = new EventParser(c.arg);
+                    EventParser parsedEvent = new EventParser(command.arg);
 
                     tasks.addEvent(parsedEvent);
                     Ui.showAdded(tasks);
@@ -149,7 +147,7 @@ public class CommandHandler {
                         throw new ZukeException.EmptyListException();
                     }
 
-                    Integer idx = CommandParser.parseIndexOrNull(c.arg, tasks.size());
+                    Integer idx = CommandParser.parseIndexOrNull(command.arg, tasks.size());
                     if (idx == null) {
                         break;
                     }
@@ -160,7 +158,7 @@ public class CommandHandler {
                 }
 
                 case FIND: {
-                    if(c.arg == null) {
+                    if(command.arg == null) {
                         throw new ZukeException.MissingDescriptionException();
                     }
 
@@ -168,13 +166,13 @@ public class CommandHandler {
                         throw new ZukeException.EmptyListException();
                     }
 
-                    DescriptionSearcher matchingTasks = new DescriptionSearcher(tasks, c.arg);
+                    DescriptionSearcher matchingTasks = new DescriptionSearcher(tasks, command.arg);
                     Ui.showFind(matchingTasks.getMatchingTasks());
                     break;
                 }
 
                 case FIND_DATE: {
-                    if(c.arg == null) {
+                    if(command.arg == null) {
                         throw new ZukeException.MissingDescriptionException();
                     }
 
@@ -182,7 +180,7 @@ public class CommandHandler {
                         throw new ZukeException.EmptyListException();
                     }
 
-                    DateTimeParser finder = new DateTimeParser(c.arg);
+                    DateTimeParser finder = new DateTimeParser(command.arg);
 
                     DateSearcher matchingTasks = new DateSearcher(tasks, finder.getParsedDate());
                     Ui.showFind(matchingTasks.getMatchingTasks());
@@ -190,11 +188,16 @@ public class CommandHandler {
 
                 }
 
-                case UNKNOWN:
-                    throw new ZukeException.UnknowInputException();
+                case GUIDE: {
+                    Ui.showQuickGuide();
+                    break;
                 }
 
-            } catch (ZukeException.UnknowInputException | ZukeException.MissingArgumentException | ZukeException.EmptyListException | ZukeException.MissingDescriptionException | ZukeException.MissingTimeException | IOException | IllegalArgumentException e) {
+                case UNKNOWN:
+                    throw new ZukeException.UnknownInputException();
+                }
+
+            } catch (ZukeException.UnknownInputException | ZukeException.MissingArgumentException | ZukeException.EmptyListException | ZukeException.MissingDescriptionException | ZukeException.MissingTimeException | IOException | IllegalArgumentException e) {
                 Ui.error(e.getMessage());
             }
 

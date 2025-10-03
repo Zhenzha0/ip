@@ -1,6 +1,6 @@
-package Searchers;
-import Task.Task;
-import Task.TaskList;
+package searchers;
+import task.Task;
+import task.TaskList;
 
 /**
  * Searches for tasks whose descriptions contain a specified search string.

@@ -1,4 +1,4 @@
-package Task.Parser;
+package task.parser;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -7,7 +7,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
-import Exception.ZukeException;
+import exception.ZukeException;
 
 /**
  * Parses date and time strings into LocalDateTime objects.
@@ -16,7 +16,7 @@ import Exception.ZukeException;
  */
 public class DateTimeParser {
     private LocalDateTime parsedDateTime;
-    private String MemoryDateTime;
+    private String memoryDateTime;
 
     /**
      * Gets the date portion of the parsed date/time.
@@ -43,8 +43,8 @@ public class DateTimeParser {
      * @throws ZukeException.MissingTimeException If the date/time string is empty.
      */
     public DateTimeParser(String dateTime) throws ZukeException.MissingTimeException {
-        parsedDateTime = ParseDateTime(dateTime);
-        MemoryDateTime = dateTime;
+        parsedDateTime = parseDateTime(dateTime);
+        memoryDateTime = dateTime;
     }
 
     /**
@@ -57,16 +57,16 @@ public class DateTimeParser {
      * @throws IllegalArgumentException If the date/time format is invalid.
      * @throws ZukeException.MissingTimeException If the date/time string is empty.
      */
-    public LocalDateTime ParseDateTime(String dateTime) throws IllegalArgumentException, ZukeException.MissingTimeException {
+    public LocalDateTime parseDateTime(String dateTime) throws IllegalArgumentException, ZukeException.MissingTimeException {
         String s = dateTime.trim();
 
         if(s.isEmpty()) {
             throw new ZukeException.MissingTimeException();
         }
 
-        DateTimeFormatter YMD = DateTimeFormatter.ofPattern("uuuu-MM-dd").withResolverStyle(ResolverStyle.STRICT);
-        DateTimeFormatter DMY = DateTimeFormatter.ofPattern("d/M/uuuu").withResolverStyle(ResolverStyle.STRICT);
-        DateTimeFormatter HM = DateTimeFormatter.ofPattern("HH:mm").withResolverStyle(ResolverStyle.STRICT);
+        DateTimeFormatter yearMonthDayFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd").withResolverStyle(ResolverStyle.STRICT);
+        DateTimeFormatter dayMonthYearFormatter = DateTimeFormatter.ofPattern("d/M/uuuu").withResolverStyle(ResolverStyle.STRICT);
+        DateTimeFormatter HourMinute = DateTimeFormatter.ofPattern("HH:mm").withResolverStyle(ResolverStyle.STRICT);
 
         String[] parts = s.split("\\s+");  // [date] [time?]
         if (parts.length > 2) {
@@ -78,9 +78,9 @@ public class DateTimeParser {
         try {
 
             if (parts[0].contains("/")) {
-                date = LocalDate.parse(parts[0], DMY);
+                date = LocalDate.parse(parts[0], dayMonthYearFormatter);
             } else {
-                date = LocalDate.parse(parts[0], YMD); // stricter than default
+                date = LocalDate.parse(parts[0], yearMonthDayFormatter); // stricter than default
             }
 
             if (parts.length > 1) {
@@ -119,6 +119,6 @@ public class DateTimeParser {
      * @return The original date/time string.
      */
     public String toMemoryDateTime() {
-        return MemoryDateTime;
+        return memoryDateTime;
     }
 }
