@@ -59,7 +59,6 @@ public class Ui {
     public static void hello() {
         line();
         System.out.println("Hello! I'm Zuke, a fast minimal CLI task manager");
-        line();
     }
 
     /**
