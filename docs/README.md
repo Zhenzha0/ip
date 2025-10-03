@@ -34,8 +34,23 @@ Zuke is a **fast, simple command-line task manager** for organizing your todos, 
     \________| \______/ \__|  \__|\________|
     
     ____________________________________________________________
-    Hello! I'm Zuke
-    What can I do for you?
+    Hello! I'm Zuke, a fast, minimal CLI task manager
+    ____________________________________________________________
+    ____________________________________________________________
+    Quick Guide:
+      todo <description>           - Add a todo task
+      deadline <desc> /by <date>   - Add a deadline
+      event <desc> /from <date> /to <date> - Add an event
+      list                         - View all tasks
+      mark <index>                 - Mark task as done
+      unmark <index>               - Mark task as not done
+      delete <index>               - Delete a task
+      find <keyword>               - Search tasks by keyword
+      date <date>                  - Find tasks on a date
+      guide                          - View command guide
+      bye                          - Exit the app
+    
+    Date formats: yyyy-MM-dd or d/M/yyyy (optional time: HHmm or HH:mm)
     ____________________________________________________________
     Loading data...
     No previous data available, start adding your task now
